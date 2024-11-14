@@ -1,46 +1,50 @@
 ﻿using blood_donations.Entities;
+using Coins.server.Service;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace blood_donations.Servies
 {
     public class BloodDoseService
     {
+        public DataContext dataContext = ManagerDataContex.DataContex;
 
-        public List<BloodDose> doses = new List<BloodDose>();
+
         public List<BloodDose> GetServies()
         {
-            return doses;
+            return dataContext.bloodDoses;
         }
-        public BloodDose GetByIdServies(string id)
+        public BloodDose GetByIdService(int id)
         {
-            return doses.FirstOrDefault(c => c.Id == id);
+            return  dataContext.bloodDoses.FirstOrDefault(b => b.Id == id);
 
         }
-        public ActionResult<bool> PostServies(BloodDose d)
+        public bool PostServies(BloodDose d)
         {
-            doses.Add(d);
+            dataContext.bloodDoses.Add(d);
             return true;
         }
-        public ActionResult<bool> PutServies(string id, BloodDose dose)
+        public bool PutServies(int id, BloodDose dose)
         {
-            foreach (BloodDose d in doses)
+            foreach (BloodDose d in dataContext.bloodDoses)
             {
                 if (d.Id == id)
                 {
-                    d.Id = id;
+                   
                    d.expirationDate=dose.expirationDate;
                     d.DatOfDonation = d.DatOfDonation;
-                    d.IdDonor = d.Id;
+                    d.IdDonor = d.IdDonor;
                     d.IsTaken = d.IsTaken;
                     d.IsChecked = d.IsChecked;
                     d.bloodType = d.bloodType;
+                    return false;
                 }
             }
             return false;
         }
-        public ActionResult<bool> DeleteServies(string id)
+        public bool DeleteServies(int id)
         {
-            return doses.Remove(doses.FirstOrDefault(d => d.Id == id));
+            return  dataContext.bloodDoses.Remove(dataContext.bloodDoses.FirstOrDefault(d => d.Id == id));
         }
     }
 }

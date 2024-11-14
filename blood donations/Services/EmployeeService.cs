@@ -1,37 +1,39 @@
 ﻿using blood_donations.Entities;
 using blood_donations.Subjects;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace blood_donations.Servies
 {
     public class EmployeeService
     {
-       public static List<Employee> Employees = new List<Employee>()
-    {
-        new Employee{Id="12",FirstNameEmployee="shevi",LastNameEmployee="kukis",employeeRank=EmployeeRank.Manager,
-            EmailEmployee="tgtr",EmployeeId="43423"} };
-
+        public DataContext dataContext = ManagerDataContex.DataContex;
 
         public List<Employee> GetServies()
         {
-            return Employees;
+            return dataContext.employees;
         }
-        public Employee GetServiesById(string id)
+        public Employee GetServiesById(int id)
         {
-            return Employees.FirstOrDefault(e => e.Id == id);
+            for (int i = 0; i < dataContext.employees.Count; i++)
+            {
+                if (dataContext.employees[i].Id==id)
+                    return dataContext.employees[i];
+            }
+            return default(Employee);
         }
-        public ActionResult<bool> PostServies(Employee e)
+        public bool PostServies(Employee e)
         {
-            Employees.Add(e);
+            dataContext.employees.Add(e);
             return true;
         }
-        public ActionResult<bool> PutServies(string id,Employee employee)
+        public bool PutServies(int id,Employee employee)
         {
-            foreach (Employee e in Employees)
+            foreach (Employee e in dataContext.employees)
             {
                 if (e.Id ==id)
                 {
-                    e.Id = employee.Id;
+                    
                     e.employeeRank = employee.employeeRank;
                     e.DateOfBegin = employee.DateOfBegin;
                     e.BirthDate = employee.BirthDate;
@@ -44,9 +46,9 @@ namespace blood_donations.Servies
             }
             return false;
         }
-        public ActionResult<bool> DeleteServies(string id)
+        public bool DeleteServies(int id)
         {
-            return Employees.Remove(Employees.FirstOrDefault(e => e.Id == id));
+            return dataContext.employees.Remove(dataContext.employees.FirstOrDefault(e => e.Id == id));
         }
     }
 }

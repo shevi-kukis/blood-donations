@@ -1,0 +1,25 @@
+{
+  "db": [
+    {
+      "Id"=1,
+      "FirstNameDonor": "Yossi",
+      "LastNameDonor": "Cohen",
+      "IdDonor": "123456789",
+      "BirthDate": "1980-03-15"
+    },
+    {
+       "Id"=2,
+      "FirstNameDonor": "Miriam",
+      "LastNameDonor": "Levi",
+      "IdDonor": "987654321",
+      "BirthDate": "1975-08-22"
+    },
+    {
+      "Id" =3,
+      "FirstNameDonor": "David",
+      "LastNameDonor": "Mizrahi",
+      "IdDonor": "112233445",
+      "BirthDate": "1990-11-10"
+    }
+  ]
+}

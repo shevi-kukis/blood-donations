@@ -14,16 +14,19 @@ namespace blood_donations.Controllers
 
         // GET: api/<CompatibilityCheckController>
         [HttpGet]
-        public IEnumerable<CompatibilityCheck> Get()
+        public ActionResult<List<CompatibilityCheck>> Get()
         {
-            return check.GetServies();
+            return Ok(check.GetServies());
         }
 
         // GET api/<Users>/5
         [HttpGet("{id}")]
-        public CompatibilityCheck Get(string id)
+        public ActionResult<CompatibilityCheck> Get(int id)
         {
-            return check.GetByIdServies(id);
+            CompatibilityCheck result = check.GetByIdServies(id);
+            if (result == null)
+            { return NotFound(); }
+            return Ok(result);
         }
 
         // POST api/<Users>
@@ -35,14 +38,14 @@ namespace blood_donations.Controllers
 
         // PUT api/<Users>/5
         [HttpPut("{id}")]
-        public ActionResult<bool> Put(string id,CompatibilityCheck c)
+        public ActionResult<bool> Put(int id,CompatibilityCheck c)
         {
             return check.PutServies(id, c);
         }
 
         // DELETE api/<Users>/5
         [HttpDelete("{id}")]
-        public ActionResult<bool> Delete(string id)
+        public ActionResult<bool> Delete(int id)
         {
             return check.DeleteServies(id);
         }

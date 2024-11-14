@@ -16,36 +16,39 @@ namespace blood_donations.Controllers
 
         [HttpGet]
 
-        public IEnumerable<BloodDose> Get()
+        public ActionResult<List<BloodDose>> Get()
         {
-            return dose.GetServies();
+            return Ok(dose.GetServies());
         }
 
         // GET api/<BloodDoseController>/5
         [HttpGet("{id}")]
        
-        public BloodDose Get(string id)
+        public ActionResult<BloodDose> Get(int id)
         {
-            return dose.GetByIdServies(id) ;
+            BloodDose result = dose.GetByIdService(id);
+            if (result == null) 
+            { return NotFound(); }
+            return Ok(result);
         }
 
         // POST api/<BloodDoseController>
         [HttpPost]
         public ActionResult<bool> Post([FromBody] BloodDose value)
         {
-            return dose.PostServies(value) ;
+            return Ok(dose.PostServies(value)) ;
         }
 
         // PUT api/<BloodDoseController>/5
         [HttpPut("{id}")]
-        public ActionResult<bool> Put( string id,[FromBody] BloodDose value)
+        public ActionResult<bool> Put( int id,[FromBody] BloodDose value)
         {
             return dose.PutServies(id, value);
         }
 
         // DELETE api/<BloodDoseController>/5
         [HttpDelete("{id}")]
-        public ActionResult<bool> Delete(string id)
+        public ActionResult<bool> Delete(int id)
         {
           return dose.DeleteServies(id) ;
         }

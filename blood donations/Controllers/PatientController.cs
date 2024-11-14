@@ -14,15 +14,18 @@ namespace blood_donations.Controllers
         public PatientServies patient { get; set; }
         // GET: api/<DonorsController>
         [HttpGet]
-        public IEnumerable<Patient> Get()
+        public ActionResult<List<Patient>> Get()
         {
-            return patient.GetServies();
+            return Ok(patient.GetServies());
         }
         // GET api/<DonorsController>/5
         [HttpGet("{id}")]
-        public Patient Get(string id)
+        public ActionResult<Patient> Get(int id)
         {
-            return patient.GetServiesById(id);
+            Patient result = patient.GetServiesById(id);
+            if (result == null)
+            { return NotFound(); }
+            return Ok(result);
         }
         // POST api/<DonorsController>
         [HttpPost]
@@ -33,14 +36,14 @@ namespace blood_donations.Controllers
 
         // PUT api/<DonorsController>/5
         [HttpPut("{id}")]
-        public ActionResult<bool> Put(string id,[FromBody] Patient value)
+        public ActionResult<bool> Put(int id,[FromBody] Patient value)
         {
             return patient.PutServies(id,value);
         }
 
         // DELETE api/<DonorsController>/5
         [HttpDelete("{id}")]
-        public ActionResult<bool> Delete(string id)
+        public ActionResult<bool> Delete(int id)
         {
             return patient.DeleteServies(id);
         }

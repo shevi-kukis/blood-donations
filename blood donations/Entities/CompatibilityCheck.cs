@@ -2,7 +2,8 @@
 {
     public class CompatibilityCheck
     {
-        public string Id { get; set; }
+        private static int id = 1;
+        public int Id { get; private set; }
 
         public string IdPatient { get; set; }
 
@@ -11,6 +12,10 @@
         public string IdBloodeDose { get; set; }
 
         public DateOnly DateCheck { get; set; }
+        public CompatibilityCheck() { 
 
+            Id = id;
+            id++;
+        } 
     }
 }

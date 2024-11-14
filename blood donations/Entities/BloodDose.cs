@@ -2,7 +2,8 @@
 {
     public class BloodDose
     {
-        public string Id { get; set; }
+        private static int id=1;
+        public int Id { get; private set; }
         public string IdDonor  { get; set; }
         public string bloodType { get; set; }
 
@@ -12,7 +13,10 @@
         public bool IsChecked { get; set; }
         public bool IsTaken { get; set; }
 
-
+        public BloodDose() {
+            Id = id;
+            id++;
+        }
 
 
     }

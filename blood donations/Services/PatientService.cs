@@ -5,27 +5,28 @@ namespace blood_donations.Servies
 {
     public class PatientServies
     {
-        public List<Patient> patients { get; set; }
+        public DataContext dataContext = ManagerDataContex.DataContex;
+
         public List<Patient> GetServies()
         {
-            return patients;
+            return dataContext.Patients;
         }
-        public Patient GetServiesById(string id)
+        public Patient GetServiesById(int id)
         {
-            return patients.FirstOrDefault(e => e.Id == id);
+            return dataContext.Patients.FirstOrDefault(e => e.Id == id);
         }
-        public ActionResult<bool> PostServies(Patient e)
+        public bool PostServies(Patient e)
         {
-            patients.Add(e);
+            dataContext.Patients.Add(e);
             return true;
         }
-        public ActionResult<bool> PutServies(string id,Patient patient)
+        public bool PutServies(int id,Patient patient)
         {
-            foreach (Patient p in patients)
+            foreach (Patient p in dataContext.Patients)
             {
                 if (p.Id == id)
                 {
-                    p.Id=patient.Id;
+                   
                     p.Origin = patient.Origin;
                     p.sex = patient.sex;
                     p.IdPatient = patient.IdPatient;
@@ -41,9 +42,9 @@ namespace blood_donations.Servies
             }
             return false;
         }
-        public ActionResult<bool> DeleteServies(string id)
+        public bool DeleteServies(int id)
         {
-            return patients.Remove(patients.FirstOrDefault(e => e.Id == id));
+            return dataContext.Patients.Remove(dataContext.Patients.FirstOrDefault(e => e.Id == id));
         }
     }
 }

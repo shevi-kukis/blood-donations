@@ -7,28 +7,31 @@ namespace blood_donations.Servies
 {
     public class CompatibilityCheckServies
     {
-        public List<CompatibilityCheck> checks = new List<CompatibilityCheck>();
+        public DataContext dataContext = ManagerDataContex.DataContex;
+
+
+
         public List<CompatibilityCheck> GetServies()
         {
-            return checks;
+            return dataContext.CompatibilityChecks;
         }
-        public CompatibilityCheck GetByIdServies(string id)
+        public CompatibilityCheck GetByIdServies(int id)
         {
-            return checks.FirstOrDefault(c => c.Id == id);
+            return dataContext.CompatibilityChecks.FirstOrDefault(c => c.Id == id);
 
         }
-        public ActionResult<bool> PostServies(CompatibilityCheck c)
+        public bool PostServies(CompatibilityCheck c)
         {
-            checks.Add(c);
+            dataContext.CompatibilityChecks.Add(c);
             return true;
         }
-        public ActionResult<bool> PutServies(string id, CompatibilityCheck check)
+        public bool PutServies(int id, CompatibilityCheck check)
         {
-            foreach (CompatibilityCheck c in checks)
+            foreach (CompatibilityCheck c in dataContext.CompatibilityChecks)
             {
                 if (c.Id == id)
                 {
-                    c.Id = id;
+                    
                     c.IdPatient = check.IdPatient;
                     c.IdBloodeDose = check.IdBloodeDose;
                     c.DateCheck = check.DateCheck;
@@ -38,9 +41,9 @@ namespace blood_donations.Servies
             }
             return false;
         }
-        public ActionResult<bool> DeleteServies(string id)
+        public bool DeleteServies(int id)
         {
-            return checks.Remove(checks.FirstOrDefault(c => c.Id == id));
+            return dataContext.CompatibilityChecks.Remove(dataContext.CompatibilityChecks.FirstOrDefault(c => c.Id == id));
         }
 
     }

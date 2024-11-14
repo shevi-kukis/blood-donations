@@ -13,7 +13,8 @@
 
         public string IdPatient { get; set; }
 
-        public string Id { get; set; }
+        private static int id = 1;
+        public int Id { get; private set; }
         public DateOnly BirthDate { get; set; }
 
         public Sex1 sex { get; set; }
@@ -30,6 +31,9 @@
 
         public string IdEmployee { get; set; }
 
-
+        public Patient()
+        {
+            Id=id++;
+        }
     }
 }

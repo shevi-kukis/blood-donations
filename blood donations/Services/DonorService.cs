@@ -1,35 +1,48 @@
-﻿using blood_donations.Subjects;
+﻿using blood_donations.Entities;
+using blood_donations.Subjects;
+using Coins.server.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Drawing;
 
 namespace blood_donations.Servies
 {
-    public class DonorServies
+    public class DonorService
     {
 
-        
-        public List<Donor> Donors { get; set; }
-        public List<Donor> GetServies   ()
+     readonly IdataContext _dataContext;
+
+        public DonorService(IdataContext dataContext)
         {
+          _dataContext = dataContext;
+        }
+      
+        public List<Donor> GetServies()
+        {
+            var Donors = _dataContext.LoadData();
            return Donors;
+            //return Donors.Select(d => d.Id).ToList();
         }
-        public Donor  GetServiesById(string id)
+        public Donor GetServiesById(int id)
         {
-        return Donors.FirstOrDefault(d=>d.Id==id);
+            var Donors = _dataContext.LoadData();
+            return Donors.Where(d => d.Id == id).FirstOrDefault();
         }
-        public ActionResult<bool> PostServies(Donor donor)
+        public bool PostServies(Donor donor)
         {
-            Donors.Add(donor);
-            return true;
+            var Donors = _dataContext.LoadData();
+              Donors.Add(donor);
+            return _dataContext.SaveData(Donors);
         }
-        public ActionResult<bool> PutServies(string id,Donor donor)
+        public bool PutServies(int id,Donor donor)
         {
-            foreach(Donor d in  Donors)
+
+            var Donors = _dataContext.LoadData();
+
+            foreach (Donor d in Donors)
             {
                 if (d.Id == id)
                 {
-                    d.Id=donor.Id;
                     d.IdDonor = donor.IdDonor;
                     d.LastNameDonor = donor.LastNameDonor;
                     d.FirstNameDonor = donor.FirstNameDonor;
@@ -39,14 +52,18 @@ namespace blood_donations.Servies
                     d.sex = donor.sex;
                     d.Origin= donor.Origin;
                     d.healthFund= donor.healthFund;
-                    return true;
+                    return _dataContext.SaveData(Donors);
+
                 }
             }
             return false;
         }
-        public ActionResult<bool> DeleteServies(string id)
+        public bool DeleteServies(int id)
         {
-           return Donors.Remove( Donors.FirstOrDefault(d=>d.Id == id));
+            var Donors = _dataContext.LoadData();
+
+             Donors.Remove(Donors.FirstOrDefault(d=>d.Id == id));
+            return _dataContext.SaveData(Donors);
         }
 
     }

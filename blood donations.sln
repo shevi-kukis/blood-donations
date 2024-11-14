@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blood donations", "blood donations\blood donations.csproj", "{7375611E-1D2B-4545-8633-193CB523B717}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "blood donations", "blood donations\blood donations.csproj", "{7375611E-1D2B-4545-8633-193CB523B717}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject2", "TestProject2\TestProject2.csproj", "{E491AB34-8C10-4695-AEA3-896C81B9C6F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{7375611E-1D2B-4545-8633-193CB523B717}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7375611E-1D2B-4545-8633-193CB523B717}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7375611E-1D2B-4545-8633-193CB523B717}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E491AB34-8C10-4695-AEA3-896C81B9C6F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E491AB34-8C10-4695-AEA3-896C81B9C6F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E491AB34-8C10-4695-AEA3-896C81B9C6F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E491AB34-8C10-4695-AEA3-896C81B9C6F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
